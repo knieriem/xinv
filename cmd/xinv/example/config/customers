@@ -1,0 +1,11 @@
+customer:
+	id: mk
+	name: Musterkunde GmbH
+	contact:
+		department: Einkauf
+	address:
+		street: Hauptstraße 45
+		locality: München
+		code: 80331
+	email: mk@example.com
+	tax-id: DE 111 111 111

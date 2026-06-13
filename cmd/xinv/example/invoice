@@ -1,0 +1,20 @@
+invoice:
+	customer-id:	mk
+	supplier-id: mm
+	code: 2026-01
+	ordering:
+		project-name: foobar
+
+	delivery:
+		period:	start=2026-03-01 end=2026-05-31
+
+	lines:
+		name:	Entwicklungsdienstleistungen
+		description:
+			- Bootloader für STM32
+			- Erweiterung eines CLI-Tools
+		price:	1234
+
+	lines:
+		name:	Support
+		price:	567.89

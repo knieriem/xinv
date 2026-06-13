@@ -1,0 +1,25 @@
+supplier:
+	id:	mm
+	name: Max Mustermann
+	trade-name: Ingenieurbüro
+	contact:
+		name:
+			given: Max
+			surname: Mustermann
+	address:
+		street: Musterstr. 123
+		locality: Berlin
+		code: 10115
+
+	return-address:
+		M. Mustermann, Musterstr. 123., 10115 Berlin
+
+	tax-id: DE 123 456 789
+	email: max.mustermann@example.com
+	phone: +49 30 123456
+	payments:
+		terms: due-days=30
+		instr:
+			sepa:
+				bank: Musterbank
+				iban: DE89 3704 0044 0532 0130 00

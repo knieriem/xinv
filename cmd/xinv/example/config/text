@@ -1,0 +1,23 @@
+localized-texts:
+	DE:
+		lang:	de
+		invoice-no:	Rechnung Nr.
+		email:	Email:
+		phone:	Tel.:
+		tax-id:	USt-IdNr:
+		date-fmt:	2.1.2006
+		invoice-date: Datum
+
+		col-pos:	Pos.
+		col-item:	Dienstleistung
+		col-price:	Betrag
+
+		total:	Zwischensumme (netto)
+		vat:	Umsatzsteuer
+		payable: Gesamtbetrag
+
+		service-period: Leistungszeitraum
+		service-date:	Leistungsdatum
+		delivery-date:	Lieferdatum
+
+		payment-terms-tpl: Zahlungsziel: {{.NumDays}} Tage (bis {{.DueDate}}).
