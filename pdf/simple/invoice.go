@@ -80,13 +80,13 @@ func (si *Invoice) formatAmount(a bl.Amount) string {
 func (si *Invoice) AddBill() pdf.Action {
 	return func(d *sdoc.Doc) error {
 
-		d.VSpace(d.VerticalSpacing())
+		d.VSpace(2 * d.VerticalSpacing())
 		d.SetTabs([]sdoc.TabPos{
-			{X: sdoc.Cm.Mult(1), Align: sdoc.Center},
-			{X: sdoc.Cm.Mult(2.5)},
-			{X: sdoc.Cm.Mult(13.5), Align: sdoc.AlignRight},
+			{X: sdoc.Cm.Mult(1.5), Align: sdoc.Center},
+			{X: sdoc.Cm.Mult(3)},
+			{X: sdoc.Cm.Mult(14), Align: sdoc.AlignRight},
 		})
-		d.HLine(sdoc.Cm.Mult(0.3), sdoc.Cm.Mult(14-0.3), sdoc.Cm.Mult(0.2))
+		d.HLine(sdoc.Cm.Mult(0.8), sdoc.Cm.Mult(14-0.5), sdoc.Cm.Mult(0.2))
 		d.WriteText(fmt.Sprintf("\t%s\t%s\t%s   \n", si.text.ColPos, si.text.ColItem, si.text.ColPrice))
 
 		//	d.SetLengthReg(sdoc.PageOffset, sdoc.Centimeters.Mult(2.71+11.5))
@@ -97,12 +97,14 @@ func (si *Invoice) AddBill() pdf.Action {
 			line := &si.inv.Lines[i]
 			fmt.Fprintf(sb, "\t%d\t%s\t%v\n", i+1, line.Name, si.formatAmount(line.Price))
 			desc := strings.TrimRight(line.Description, "\n")
-			for desc := range strings.SplitSeq(desc, "\n") {
-				fmt.Fprintf(sb, "\t\t%s\n", desc)
+			if desc != "" {
+				for item := range strings.SplitSeq(desc, "\n") {
+					fmt.Fprintf(sb, "\t\t%s\n", item)
+				}
 			}
 			d.WriteText(sb.String())
 		}
-		d.HLine(sdoc.Cm.Mult(0.3), sdoc.Cm.Mult(14-0.3), 0)
+		d.HLine(sdoc.Cm.Mult(0.8), sdoc.Cm.Mult(14-0.5), 0)
 		return nil
 	}
 }
@@ -113,21 +115,24 @@ func (si *Invoice) AddTotals() pdf.Action {
 		text := si.text
 		d.VSpace(d.VerticalSpacing() * 2)
 		d.SetTabs([]sdoc.TabPos{
-			{X: sdoc.Cm.Mult(10.5), Align: sdoc.AlignRight},
-			{X: sdoc.Cm.Mult(13.5), Align: sdoc.AlignRight},
+			{X: sdoc.Cm.Mult(11), Align: sdoc.AlignRight},
+			{X: sdoc.Cm.Mult(14), Align: sdoc.AlignRight},
 		})
-		d.HLine(sdoc.Cm.Mult(6), sdoc.Cm.Mult(8), sdoc.Cm.Mult(0.2))
+		hline := func() {
+			d.HLine(sdoc.Cm.Mult(6.2), sdoc.Cm.Mult(8.1), sdoc.Cm.Mult(0.2))
+		}
+		hline()
 		d.WriteText(fmt.Sprintf("\t%s\t%v\n", text.Total, si.formatAmount(totals.BaseNet)))
 
 		for i := range totals.Taxes {
 			tax := &totals.Taxes[i]
 			d.VSpace(d.VerticalSpacing() / 2)
-			d.HLine(sdoc.Cm.Mult(6), sdoc.Cm.Mult(8), sdoc.Cm.Mult(0.2))
+			hline()
 			d.WriteText(fmt.Sprintf("\t%s %g\u202f%%\t%v\n", text.VAT, tax.Pct.Float64(), si.formatAmount(tax.Tax)))
 		}
 
 		d.VSpace(d.VerticalSpacing() / 2)
-		d.HLine(sdoc.Cm.Mult(6), sdoc.Cm.Mult(8), sdoc.Cm.Mult(0.2))
+		hline()
 		d.WriteText(fmt.Sprintf("\t%s\t%v\n", text.Payable, si.formatAmount(totals.Payable)))
 		return nil
 	}
