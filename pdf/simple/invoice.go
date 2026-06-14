@@ -180,8 +180,13 @@ func (si *Invoice) AddSupplierInfo() pdf.Action {
 
 		text := si.text
 		sb.WriteByte('\n')
-		fmt.Fprintf(sb, "%s\t%s\n", text.Email, suppl.Email)
-		fmt.Fprintf(sb, "%s\t%s\n", text.Phone, suppl.Phone)
+		if d.TextWidth(suppl.Email) > sdoc.Cm.Mult(4.2) {
+			addLine(sb, suppl.Email)
+			addLine(sb, suppl.Phone)
+		} else {
+			fmt.Fprintf(sb, "%s\t%s\n", text.Email, suppl.Email)
+			fmt.Fprintf(sb, "%s\t%s\n", text.Phone, suppl.Phone)
+		}
 		sb.WriteByte('\n')
 		fmt.Fprintf(sb, "%s %s\n", text.TaxID, suppl.TaxID)
 

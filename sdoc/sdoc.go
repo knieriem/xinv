@@ -80,6 +80,14 @@ func (d *Doc) GoPDF() *gopdf.GoPdf {
 	return d.pdf
 }
 
+func (d *Doc) TextWidth(s string) Length {
+	w, err := d.pdf.MeasureTextWidth(s)
+	if err != nil {
+		return 0
+	}
+	return d.lengthFromPDFUnit(w)
+}
+
 func (d *Doc) MoveYAbs(y Length) {
 	d.y = y
 }
