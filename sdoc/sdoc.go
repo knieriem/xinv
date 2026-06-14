@@ -141,20 +141,17 @@ func (d *Doc) writeLineTabbed(line string, x0 Length, tabs []TabPos) {
 		}
 
 		x := t.x
-		wc := 1.0
+		div := Length(1)
 		if t.cur != -1 {
 			tab := &t.tabs[t.cur]
 			switch tab.Align {
 			case AlignLeft:
 			case Center:
-				wc = 0.5
+				div = 2
 				fallthrough
 			case AlignRight:
-				w, err := pdf.MeasureTextWidth(s)
-				if err != nil {
-					continue
-				}
-				x -= d.lengthFromPDFUnit(w * wc)
+				w := d.TextWidth(s)
+				x -= w / div
 
 			}
 		} else {
