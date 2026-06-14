@@ -24,6 +24,8 @@ import (
 var (
 	confDir   = flag.String("C", "config", "configuration directory")
 	outputPDF = flag.String("o", "", "output PDF filename")
+
+	issueTime time.Time
 )
 
 type config struct {
@@ -37,6 +39,7 @@ type doc struct {
 }
 
 func main() {
+	flag.TextVar(&issueTime, "date", time.Time{}, "issue date")
 	flag.Parse()
 
 	if *outputPDF == "" {
@@ -54,7 +57,9 @@ func main() {
 		errExit(err)
 	}
 
-	issueTime := time.Now()
+	if issueTime.IsZero() {
+		issueTime = time.Now()
+	}
 
 	err = createXInvoice(*outputPDF, &invDoc, issueTime, conf)
 	if err != nil {
@@ -65,7 +70,6 @@ func main() {
 func createXInvoice(outFilename string, src *doc, issueTime time.Time, c *config) error {
 
 	inst := xinv.NewInstance(c.Customer, c.Supplier)
-	issueTime = time.Date(2026, 6, 9, 12, 0, 0, 0, time.Local)
 	inv, err := inst.MakeInvoice(&src.Invoice, issueTime)
 	if err != nil {
 		return err
