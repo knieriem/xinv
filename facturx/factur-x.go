@@ -60,6 +60,7 @@ func WriteDoc(w io.Writer, pdfData []byte, inv *InvoiceData) error {
 	if err != nil {
 		return err
 	}
+	api.OptimizeContext(ctx)
 
 	ctx.Write.CreationDateOverride = inv.IssueTime
 	return api.WriteContext(ctx, w)
