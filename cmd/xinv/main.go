@@ -4,11 +4,13 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
 	"io/fs"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/knieriem/xinv"
@@ -24,6 +26,7 @@ import (
 var (
 	confDir   = flag.String("C", "config", "configuration directory")
 	outputPDF = flag.String("o", "", "output PDF filename")
+	debug     = flag.Bool("D", false, "activate debugging output")
 
 	issueTime time.Time
 )
@@ -57,6 +60,10 @@ func main() {
 		errExit(err)
 	}
 
+	if *debug {
+		writeStructFile("config.json", conf)
+		writeStructFile("invoice.json", &invDoc)
+	}
 	if issueTime.IsZero() {
 		issueTime = time.Now()
 	}
@@ -73,6 +80,13 @@ func createXInvoice(outFilename string, src *doc, issueTime time.Time, c *config
 	inv, err := inst.MakeInvoice(&src.Invoice, issueTime)
 	if err != nil {
 		return err
+	}
+	if *debug {
+		j, err := json.MarshalIndent(inv.GOBLData(), "", "\t")
+		if err != nil {
+			return err
+		}
+		os.WriteFile(",,debug/gobl.json", j, 0644)
 	}
 
 	fonts := pdf.FontSetup{
@@ -105,6 +119,9 @@ func createXInvoice(outFilename string, src *doc, issueTime time.Time, c *config
 	doc.Run(si.AddSupplierInfo())
 
 	pdfBytes := doc.Bytes()
+	if *debug {
+		os.WriteFile(",,debug/plain.pdf", pdfBytes, 0644)
+	}
 
 	fxi := facturx.InvoiceData{
 		Code:         inv.Code,
@@ -151,6 +168,18 @@ func parseConfig() (*config, error) {
 		return nil, err
 	}
 	return &c, nil
+}
+
+func writeStructFile(name string, data any) {
+	err := os.MkdirAll(",,debug", 0755)
+	if err != nil {
+		return
+	}
+	b, err := json.MarshalIndent(data, "", "\t")
+	if err != nil {
+		return
+	}
+	os.WriteFile(filepath.Join(",,debug", name), b, 0644)
 }
 
 func errExit(err error) {
