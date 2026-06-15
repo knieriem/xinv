@@ -1,0 +1,218 @@
+{
+	"$schema": "https://gobl.org/draft-0/envelope",
+	"head": {
+		"uuid": "019ecf21-3eac-7961-a87e-419092168e0e",
+		"dig": {
+			"alg": "sha256",
+			"val": "84d849f907f5dc55dd67eee33e496e22506372ef142845a47de02690ac53eeea"
+		}
+	},
+	"doc": {
+		"$schema": "https://gobl.org/draft-0/bill/invoice",
+		"$regime": "DE",
+		"$addons": [
+			"eu-en16931-v2017",
+			"de-zugferd-v2"
+		],
+		"uuid": "019ecf21-3eac-7978-a928-2b392d994695",
+		"type": "standard",
+		"code": "2026-01",
+		"issue_date": "2026-01-02",
+		"currency": "EUR",
+		"tax": {
+			"ext": {
+				"untdid-document-type": "380"
+			}
+		},
+		"supplier": {
+			"name": "Max Mustermann",
+			"tax_id": {
+				"country": "DE",
+				"code": "123456789"
+			},
+			"people": [
+				{
+					"name": {
+						"given": "Max",
+						"surname": "Mustermann"
+					},
+					"emails": [
+						{
+							"addr": "max.mustermann@example.com"
+						}
+					]
+				}
+			],
+			"inboxes": [
+				{
+					"email": "max.mustermann@example.com"
+				}
+			],
+			"addresses": [
+				{
+					"street": "Musterstr. 123",
+					"locality": "Berlin",
+					"code": "10115",
+					"country": "DE"
+				}
+			],
+			"emails": [
+				{
+					"addr": "max.mustermann@example.com"
+				}
+			],
+			"telephones": [
+				{
+					"num": "+49 30 123456"
+				}
+			]
+		},
+		"customer": {
+			"name": "Musterkunde GmbH",
+			"tax_id": {
+				"country": "DE",
+				"code": "123456789"
+			},
+			"people": [
+				{
+					"name": {},
+					"role": "Einkauf",
+					"emails": [
+						{
+							"addr": "mk@example.com"
+						}
+					]
+				}
+			],
+			"inboxes": [
+				{
+					"email": "mk@example.com"
+				}
+			],
+			"addresses": [
+				{
+					"street": "Hauptstraße 45",
+					"locality": "München",
+					"code": "80331",
+					"country": "DE"
+				}
+			],
+			"emails": [
+				{
+					"addr": "mk@example.com"
+				}
+			]
+		},
+		"lines": [
+			{
+				"i": 1,
+				"quantity": "1",
+				"item": {
+					"name": "Entwicklungsdienstleistungen",
+					"description": "- Bootloader für STM32\n- Erweiterung eines CLI-Tools",
+					"price": "1234.00",
+					"unit": "one"
+				},
+				"sum": "1234.00",
+				"taxes": [
+					{
+						"cat": "VAT",
+						"key": "standard",
+						"rate": "general",
+						"percent": "19%",
+						"ext": {
+							"untdid-tax-category": "S"
+						}
+					}
+				],
+				"total": "1234.00"
+			},
+			{
+				"i": 2,
+				"quantity": "1",
+				"item": {
+					"name": "Support",
+					"price": "567.89",
+					"unit": "one"
+				},
+				"sum": "567.89",
+				"taxes": [
+					{
+						"cat": "VAT",
+						"key": "standard",
+						"rate": "general",
+						"percent": "19%",
+						"ext": {
+							"untdid-tax-category": "S"
+						}
+					}
+				],
+				"total": "567.89"
+			}
+		],
+		"ordering": {
+			"projects": [
+				{
+					"code": "foobar",
+					"description": "foobar"
+				}
+			]
+		},
+		"payment": {
+			"terms": {
+				"due_dates": [
+					{
+						"date": "2026-02-01",
+						"amount": "2144.25"
+					}
+				]
+			},
+			"instructions": {
+				"key": "credit-transfer",
+				"credit_transfer": [
+					{
+						"iban": "DE89370400440532013000",
+						"name": "Musterbank"
+					}
+				],
+				"ext": {
+					"untdid-payment-means": "30"
+				}
+			}
+		},
+		"delivery": {
+			"date": "2026-05-31",
+			"period": {
+				"start": "2026-03-01",
+				"end": "2026-05-31"
+			}
+		},
+		"totals": {
+			"sum": "1801.89",
+			"total": "1801.89",
+			"taxes": {
+				"categories": [
+					{
+						"code": "VAT",
+						"rates": [
+							{
+								"key": "standard",
+								"ext": {
+									"untdid-tax-category": "S"
+								},
+								"base": "1801.89",
+								"percent": "19%",
+								"amount": "342.36"
+							}
+						],
+						"amount": "342.36"
+					}
+				],
+				"sum": "342.36"
+			},
+			"tax": "342.36",
+			"total_with_tax": "2144.25",
+			"payable": "2144.25"
+		}
+	}
+}

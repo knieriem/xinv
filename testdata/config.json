@@ -1,0 +1,95 @@
+{
+	"Customer": [
+		{
+			"ID": "mk",
+			"Name": "Musterkunde GmbH",
+			"TradeName": "",
+			"Address": {
+				"Number": "",
+				"Street": "Hauptstraße 45",
+				"StreetExtra": "",
+				"Locality": "München",
+				"Code": "80331",
+				"Country": ""
+			},
+			"ReturnAddress": "",
+			"Email": "mk@example.com",
+			"Phone": "",
+			"Contact": {
+				"Name": {},
+				"Department": "Einkauf",
+				"Email": ""
+			},
+			"MachineEmail": "",
+			"TaxID": "DE 111 111 111",
+			"Payments": {
+				"Terms": {
+					"DueDays": 0
+				},
+				"Instr": {
+					"SEPA": null
+				}
+			}
+		}
+	],
+	"Supplier": [
+		{
+			"ID": "mm",
+			"Name": "Max Mustermann",
+			"TradeName": "Ingenieurbüro",
+			"Address": {
+				"Number": "",
+				"Street": "Musterstr. 123",
+				"StreetExtra": "",
+				"Locality": "Berlin",
+				"Code": "10115",
+				"Country": ""
+			},
+			"ReturnAddress": "M. Mustermann, Musterstr. 123., 10115 Berlin\n",
+			"Email": "max.mustermann@example.com",
+			"Phone": "+49 30 123456",
+			"Contact": {
+				"Name": {
+					"given": "Max",
+					"surname": "Mustermann"
+				},
+				"Department": "",
+				"Email": ""
+			},
+			"MachineEmail": "",
+			"TaxID": "DE 123 456 789",
+			"Payments": {
+				"Terms": {
+					"DueDays": 30
+				},
+				"Instr": {
+					"SEPA": {
+						"Bank": "Musterbank",
+						"IBAN": "DE89 3704 0044 0532 0130 00"
+					}
+				}
+			}
+		}
+	],
+	"LocalizedTexts": {
+		"DE": {
+			"Lang": "de",
+			"InvoiceNo": "Rechnung Nr.",
+			"InvoiceDate": "Datum",
+			"DateFmt": "2.1.2006",
+			"Email": "Email:",
+			"Phone": "Tel.:",
+			"TaxID": "USt-IdNr:",
+			"ColPos": "Pos.",
+			"ColItem": "Dienstleistung",
+			"ColPrice": "Betrag",
+			"Total": "Zwischensumme (netto)",
+			"VAT": "Umsatzsteuer",
+			"Payable": "Gesamtbetrag",
+			"ServicePeriod": "Leistungszeitraum",
+			"ServiceDate": "Leistungsdatum",
+			"DeliveryDate": "Lieferdatum",
+			"PaymentTermsTpl": "Zahlungsziel: {{.NumDays}} Tage (bis {{.DueDate}})."
+		}
+	}
+}

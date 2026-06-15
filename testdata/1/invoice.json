@@ -1,0 +1,33 @@
+{
+	"Invoice": {
+		"Code": "2026-01",
+		"CustomerID": "mk",
+		"SupplierID": "mm",
+		"Ordering": {
+			"Code": "",
+			"ProjectID": "",
+			"ProjectName": "foobar"
+		},
+		"Delivery": {
+			"Date": null,
+			"Period": {
+				"start": "2026-03-01",
+				"end": "2026-05-31"
+			}
+		},
+		"Lines": [
+			{
+				"Quantity": 0,
+				"Name": "Entwicklungsdienstleistungen",
+				"Description": "- Bootloader für STM32\n- Erweiterung eines CLI-Tools\n",
+				"Price": "1234"
+			},
+			{
+				"Quantity": 0,
+				"Name": "Support",
+				"Description": "",
+				"Price": "567.89"
+			}
+		]
+	}
+}
