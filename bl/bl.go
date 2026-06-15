@@ -58,6 +58,7 @@ type Invoice struct {
 	Currency Currency
 	Totals   Totals
 
+	env          *gobl.Envelope
 	ZUGFeRDV2XML []byte
 }
 
@@ -332,6 +333,10 @@ func (inv *Invoice) Calculate() error {
 		return err
 	}
 	inv.ZUGFeRDV2XML = xmlData
-
+	inv.env = env
 	return nil
+}
+
+func (inv *Invoice) GOBLData() *gobl.Envelope {
+	return inv.env
 }
