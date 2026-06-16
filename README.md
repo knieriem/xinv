@@ -40,38 +40,40 @@ _Xinv_ consists of the following sub-packages:
 
 ```mermaid
 graph TD
-    Data[Tab-indented Input, parsed by
-	    cmd/xinv into Go structs:
-        Invoice, Lists of customers,
-	    suppliers, Config
+	Data["`Tab-indented Input,
+	parsed by cmd/xinv
+	into Go structs:
+	Invoice, Lists of customers,
+	suppliers, Config`"
 	] --> BL[pkg: bl]
     
-    BL -->|"transforms src into gobl/bill.Invoice
-	.Calculate()"| BI[bill.Invoice]
+	BL -->|"`transforms src into
+	gobl/bill.Invoice
+	.Calculate()`"| BI[bill.Invoice]
 	
 	BI --> GC[pkg: gobl.cii]
   
-    GC --> XML[ZUGFeRD / Factur-X XML]
+	GC --> XML[ZUGFeRD / Factur-X XML]
     
-    BI --> PDF[pkg: pdf, sdoc, gopdf]
+	BI --> PDF[pkg: pdf, sdoc, gopdf]
 
 	Data --> PDF
 
-    PDF --> RawPDF[plain PDF]
+	PDF --> RawPDF[plain PDF]
 
-    XML --> FX[pkg: facturx
-	    adds XML as attachment
-	    adds PDF/A-3 elements
-	    using pdfcpu
+	XML --> FX["`pkg: facturx
+	adds XML as attachment
+	adds PDF/A-3 elements
+	using pdfcpu`"
 	]
-    RawPDF --> FX
+	RawPDF --> FX
     
-    FX --> Final[Factur-X Document]
+	FX --> Final[Factur-X Document]
 
-    style GC fill:#C5E7FF,stroke:#333,stroke-width:2px
-    style BL fill:#C5E7FF,stroke:#333,stroke-width:2px
-    style FX fill:#C5E7FF,stroke:#333,stroke-width:2px
-    style PDF fill:#C5E7FF,stroke:#333,stroke-width:2px
+	style GC fill:#C5E7FF,stroke:#333,stroke-width:2px
+	style BL fill:#C5E7FF,stroke:#333,stroke-width:2px
+	style FX fill:#C5E7FF,stroke:#333,stroke-width:2px
+	style PDF fill:#C5E7FF,stroke:#333,stroke-width:2px
 ```
 
 ## Usage
